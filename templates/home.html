@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Car Price Predictor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite;
+      color: #2c3e50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 15px;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      width: 100%;
+      max-width: 400px;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      color: white;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.8);
+      outline: none;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .form-group label {
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      padding: 0 5px;
+      color: #555;
+      transition: 0.3s;
+      pointer-events: none;
+      font-size: 15px;
+    }
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group select:focus + label,
+    .form-group select:valid + label {
+      top: -10px;
+      left: 8px;
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 4px;
+      color: #8e44ad;
+      font-weight: bold;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(to right, #f39c12, #d35400);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #d35400, #e67e22);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
+      text-align: center;
+      font-size: 18px;
+      color: #2c3e50;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        padding: 25px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>🚗 CAR PRICE PREDICTOR</h1>
+    <form method="POST">
+
+      <div class="form-group">
+        <select name="name" required>
+          <option value="" disabled selected hidden></option>
+          <option>Maruti</option>
+          <option>Tata</option>
+          <option>Mahindra</option>
+        </select>
+        <label>Car Brand</label>
+      </div>
+
+      <div class="form-group">
+        <input type="number" name="age" placeholder=" " min="1" max="15" required>
+        <label>Age of Car (Years)</label>
+      </div>
+
+      <div class="form-group">
+        <input type="number" name="km" placeholder=" " min="1000" max="200000" required>
+        <label>KMs Driven</label>
+      </div>
+
+      <button type="submit" class="btn">Predict Price</button>
+    </form>
+
+    {% if price %}
+    <div class="result">
+       Your <strong>{{ brand }}</strong> car's estimated price is:<br>
+      <strong>₹ {{ price }}</strong>
+    </div>
+    {% endif %}
+  </div>
+
+</body>
+</html>
